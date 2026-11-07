@@ -1,3 +1,4 @@
+import ViTranslator from '@/i18n-vi/ViTranslator';
 import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        <ViTranslator />
         <Analytics />
         <SpeedInsights />
       </body>

@@ -1,0 +1,40 @@
+/* Ẩn trang tới khi dịch xong lượt đầu; tự hiện sau 1.5s nếu JS lỗi. */
+html:not(.vi-ready) body {
+  visibility: hidden;
+  animation: vi-reveal 0s linear 1.5s forwards;
+}
+@keyframes vi-reveal {
+  to { visibility: visible; }
+}
+
+/* ── Chỉnh layout cho chữ Việt dài hơn chữ Hán ── */
+
+/* Trang chủ: 14 chip chính tinh (grid 7 cột cố định) → flex-wrap, không bẻ dòng giữa tên sao */
+.grid.grid-cols-7.max-w-\[540px\] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 640px;
+}
+.grid.grid-cols-7.max-w-\[540px\] > div { white-space: nowrap; padding-inline: 10px; }
+
+/* Thanh nav cố định: nút không xuống dòng; mobile ẩn nhãn "Màu tối/Màu sáng" của nút đổi theme */
+nav.fixed button { white-space: nowrap; }
+@media (max-width: 480px) {
+  nav.fixed > div:first-child { letter-spacing: 0.12em; }
+  nav.fixed button[aria-label] > span { display: none; }
+  nav.fixed button[aria-label] { padding-inline: 6px; }
+}
+
+/* Header các trang library/knowledge (3 cột, letter-spacing inline rộng) → mobile chữ dính nhau giữa các cột */
+@media (max-width: 480px) {
+  .px-6.py-4.flex.items-center.justify-between { gap: 12px; padding-inline: 16px; }
+  .px-6.py-4.flex.items-center.justify-between > * { letter-spacing: 0.06em !important; font-size: 11px !important; }
+}
+
+/* Ô cung lá số trên mobile: tên chính tinh không bẻ đôi (badge Hóa xuống dòng thay vì ép tên), tên cung gọn hơn */
+@media (max-width: 480px) {
+  .p-1\.5.flex-col .flex.items-center > .text-\[13px\].font-bold { font-size: 11.5px; }
+  .p-1\.5.flex-col .flex.items-center:has(> .text-\[13px\].font-bold) { flex-wrap: wrap; }
+  .p-1\.5.flex-col .pr-8 > .text-\[10px\].font-medium { font-size: 9.5px; letter-spacing: 0; }
+}
